@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.LipinxinxiMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Lipinxinxi">
+    <id column="id" jdbcType="INTEGER" property="id" />
+	<result column="lipintupian" jdbcType="VARCHAR" property="lipintupian" />    <result column="lipinbianhao" jdbcType="VARCHAR" property="lipinbianhao" />    <result column="lipinmingcheng" jdbcType="VARCHAR" property="lipinmingcheng" />    <result column="suoxujifen" jdbcType="VARCHAR" property="suoxujifen" />    
+    <result column="addtime" jdbcType="VARCHAR" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, lipintupian,lipinbianhao,lipinmingcheng,suoxujifen, addtime
+  </sql>
+  <select id="quchongLipinxinxi"  parameterType="java.util.Map" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from lipinxinxi 
+    where lipinbianhao = #{lipinbianhao,jdbcType=VARCHAR} limit 0,1
+  </select>
+ <select id="getCount"   resultType="int" parameterType="java.util.Map" >
+    select  count(*) from lipinxinxi  where 1=1
+    <if test="lipintupian!=null">and lipintupian like  concat('%',#{lipintupian,jdbcType=VARCHAR},'%')</if>     <if test="lipinbianhao!=null">and lipinbianhao like  concat('%',#{lipinbianhao,jdbcType=VARCHAR},'%')</if>     <if test="lipinmingcheng!=null">and lipinmingcheng like  concat('%',#{lipinmingcheng,jdbcType=VARCHAR},'%')</if>     <if test="suoxujifen1!=null">and suoxujifen &gt;=  concat('',#{suoxujifen1,jdbcType=VARCHAR},'')</if>     <if test="suoxujifen2!=null">and suoxujifen &lt;=  concat('',#{suoxujifen2,jdbcType=VARCHAR},'')</if>     
+  </select> 
+  <select id="getAll"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from lipinxinxi  where 1=1
+    <if test="lipinbianhao!=null">
+    and lipinbianhao =#{lipinbianhao}
+    </if>
+  </select>
+  
+  <select id="getsylipinxinxi1"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from lipinxinxi  where 1=1
+    limit 0,8
+  </select>
+  <select id="getsylipinxinxi2"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from lipinxinxi  where 1=1
+    limit 0,8
+  </select>
+  <select id="getsylipinxinxi3"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from lipinxinxi  where 1=1
+    limit 0,8
+  </select>
+  
+   <select id="getByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select  <include refid="Base_Column_List" /> 
+     from lipinxinxi where 1=1 
+     <if test="lipintupian!=null">and lipintupian like  concat('%',#{lipintupian,jdbcType=VARCHAR},'%')</if>     <if test="lipinbianhao!=null">and lipinbianhao like  concat('%',#{lipinbianhao,jdbcType=VARCHAR},'%')</if>     <if test="lipinmingcheng!=null">and lipinmingcheng like  concat('%',#{lipinmingcheng,jdbcType=VARCHAR},'%')</if>     <if test="suoxujifen1!=null">and suoxujifen &gt;=  concat('',#{suoxujifen1,jdbcType=VARCHAR},'')</if>     <if test="suoxujifen2!=null">and suoxujifen &lt;=  concat('',#{suoxujifen2,jdbcType=VARCHAR},'')</if>     
+	 order by id desc
+     <if test="pageno!=null and pageSize!=null">
+     limit #{pageno},#{pageSize}
+     </if>
+     </select>
+	 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lipinxinxi
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lipinxinxi
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Lipinxinxi">
+    insert into lipinxinxi (id, lipintupian,lipinbianhao,lipinmingcheng,suoxujifen, addtime)
+    values (#{id,jdbcType=INTEGER}, #{lipintupian,jdbcType=VARCHAR},#{lipinbianhao,jdbcType=VARCHAR},#{lipinmingcheng,jdbcType=VARCHAR},#{suoxujifen,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Lipinxinxi">
+    insert into lipinxinxi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="lipintupian != null"> lipintupian, </if>      <if test="lipinbianhao != null"> lipinbianhao, </if>      <if test="lipinmingcheng != null"> lipinmingcheng, </if>      <if test="suoxujifen != null"> suoxujifen, </if>      
+      <if test="addtime != null">
+        addtime,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lipintupian != null"> #{lipintupian,jdbcType=VARCHAR},</if>      <if test="lipinbianhao != null"> #{lipinbianhao,jdbcType=VARCHAR},</if>      <if test="lipinmingcheng != null"> #{lipinmingcheng,jdbcType=VARCHAR},</if>      <if test="suoxujifen != null"> #{suoxujifen,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Lipinxinxi">
+    update lipinxinxi
+    <set>
+	  <if test="lipintupian != null"> lipintupian = #{lipintupian,jdbcType=VARCHAR},</if>      <if test="lipinbianhao != null"> lipinbianhao = #{lipinbianhao,jdbcType=VARCHAR},</if>      <if test="lipinmingcheng != null"> lipinmingcheng = #{lipinmingcheng,jdbcType=VARCHAR},</if>      <if test="suoxujifen != null"> suoxujifen = #{suoxujifen,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.entity.Lipinxinxi">
+    update lipinxinxi
+    set lipintupian = #{lipintupian,jdbcType=VARCHAR},lipinbianhao = #{lipinbianhao,jdbcType=VARCHAR},lipinmingcheng = #{lipinmingcheng,jdbcType=VARCHAR},suoxujifen = #{suoxujifen,jdbcType=VARCHAR},  addtime = #{addtime,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

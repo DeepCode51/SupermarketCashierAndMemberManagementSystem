@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ShangpinleibieMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Shangpinleibie">
+    <id column="id" jdbcType="INTEGER" property="id" />
+	<result column="leibie" jdbcType="VARCHAR" property="leibie" />    <result column="shuoming" jdbcType="VARCHAR" property="shuoming" />    
+    <result column="addtime" jdbcType="VARCHAR" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, leibie,shuoming, addtime
+  </sql>
+  <select id="quchongShangpinleibie"  parameterType="java.util.Map" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from shangpinleibie 
+    where leibie = #{leibie,jdbcType=VARCHAR} limit 0,1
+  </select>
+ <select id="getCount"   resultType="int" parameterType="java.util.Map" >
+    select  count(*) from shangpinleibie  where 1=1
+    <if test="leibie!=null">and leibie like  concat('%',#{leibie,jdbcType=VARCHAR},'%')</if>     <if test="shuoming!=null">and shuoming like  concat('%',#{shuoming,jdbcType=VARCHAR},'%')</if>     
+  </select> 
+  <select id="getAll"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from shangpinleibie  where 1=1
+    <if test="leibie!=null">
+    and leibie =#{leibie}
+    </if>
+  </select>
+  
+  <select id="getsyshangpinleibie1"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from shangpinleibie  where 1=1
+    limit 0,8
+  </select>
+  <select id="getsyshangpinleibie2"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from shangpinleibie  where 1=1
+    limit 0,8
+  </select>
+  <select id="getsyshangpinleibie3"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from shangpinleibie  where 1=1
+    limit 0,8
+  </select>
+  
+   <select id="getByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select  <include refid="Base_Column_List" /> 
+     from shangpinleibie where 1=1 
+     <if test="leibie!=null">and leibie like  concat('%',#{leibie,jdbcType=VARCHAR},'%')</if>     <if test="shuoming!=null">and shuoming like  concat('%',#{shuoming,jdbcType=VARCHAR},'%')</if>     
+	 order by id desc
+     <if test="pageno!=null and pageSize!=null">
+     limit #{pageno},#{pageSize}
+     </if>
+     </select>
+	 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shangpinleibie
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shangpinleibie
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Shangpinleibie">
+    insert into shangpinleibie (id, leibie,shuoming, addtime)
+    values (#{id,jdbcType=INTEGER}, #{leibie,jdbcType=VARCHAR},#{shuoming,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Shangpinleibie">
+    insert into shangpinleibie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="leibie != null"> leibie, </if>      <if test="shuoming != null"> shuoming, </if>      
+      <if test="addtime != null">
+        addtime,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="leibie != null"> #{leibie,jdbcType=VARCHAR},</if>      <if test="shuoming != null"> #{shuoming,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Shangpinleibie">
+    update shangpinleibie
+    <set>
+	  <if test="leibie != null"> leibie = #{leibie,jdbcType=VARCHAR},</if>      <if test="shuoming != null"> shuoming = #{shuoming,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.entity.Shangpinleibie">
+    update shangpinleibie
+    set leibie = #{leibie,jdbcType=VARCHAR},shuoming = #{shuoming,jdbcType=VARCHAR},  addtime = #{addtime,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

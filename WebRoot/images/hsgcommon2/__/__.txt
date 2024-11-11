@@ -1,0 +1,44 @@
+常态：
+background-color:#f44336;
+border-color:#f44336;
+
+hover:
+
+background-color:#6F3;
+border-color:#6F3;
+
+focus:
+
+background-color:#6F3;
+border-color:#6F3;
+
+
+
+
+
+查找  /*代码更改 */
+对下面颜色代码更改
+
+
+
+/*代码添加 start*/
+input:hover{
+	outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,255,39,.6);
+}
+
+input:focus{
+	outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,255,39,.6);
+}
+
+.btn:focus{
+	outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,255,39,.6);
+}
+
+
+/*代码添加end*/
